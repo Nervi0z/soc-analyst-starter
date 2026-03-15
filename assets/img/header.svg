@@ -1,0 +1,264 @@
+<svg viewBox="0 0 900 240" xmlns="http://www.w3.org/2000/svg" width="900" height="240">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020810"/>
+      <stop offset="100%" stop-color="#030d1a"/>
+    </linearGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="50%" stop-color="#9B59ED"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="barGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7C3AED"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="scanGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#06B6D4" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="glow-title">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-soft">
+      <feGaussianBlur stdDeviation="2" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <filter id="glow-bar">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <clipPath id="banner-clip">
+      <rect width="900" height="240" rx="0"/>
+    </clipPath>
+  </defs>
+
+  <style>
+    /* Grid */
+    .grid { stroke: #0c1a2e; stroke-width: 0.6; fill: none; }
+
+    /* Corners */
+    .corner { stroke: #7C3AED; stroke-width: 1.5; fill: none; }
+    .c1 { stroke-dasharray: 22; stroke-dashoffset: 22; animation: drawc 0.35s ease forwards 0.05s; }
+    .c2 { stroke-dasharray: 22; stroke-dashoffset: 22; animation: drawc 0.35s ease forwards 0.15s; }
+    .c3 { stroke-dasharray: 22; stroke-dashoffset: 22; animation: drawc 0.35s ease forwards 0.25s; }
+    .c4 { stroke-dasharray: 22; stroke-dashoffset: 22; animation: drawc 0.35s ease forwards 0.35s; }
+
+    /* Top accent line */
+    .accent-line { stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawline 1s ease forwards 0.4s; }
+
+    /* Boot sequence lines */
+    .boot0 { opacity:0; animation: pop 0.1s ease forwards 0.5s; }
+    .boot1 { opacity:0; animation: pop 0.1s ease forwards 0.7s; }
+    .boot2 { opacity:0; animation: pop 0.1s ease forwards 0.85s; }
+    .boot3 { opacity:0; animation: pop 0.1s ease forwards 1.0s; }
+    .boot4 { opacity:0; animation: pop 0.1s ease forwards 1.15s; }
+
+    /* Progress bar */
+    .bar-bg { fill: #0a1628; }
+    .bar-fill { animation: barfill 0.8s ease forwards 1.3s; transform-origin: left; transform: scaleX(0); }
+
+    /* Main title */
+    .title { font-family: 'JetBrains Mono', 'Courier New', monospace; font-weight: 700; font-size: 38px; fill: url(#titleGrad); filter: url(#glow-title); opacity: 0; animation: fadein 0.6s ease forwards 1.5s; }
+
+    /* Subtitle */
+    .sub { font-family: 'JetBrains Mono', 'Courier New', monospace; font-weight: 400; font-size: 12.5px; fill: #94A3B8; opacity: 0; animation: fadein 0.5s ease forwards 1.75s; }
+
+    /* Tags */
+    .tag { opacity: 0; }
+    .t1 { animation: tagpop 0.3s ease forwards 2.0s; }
+    .t2 { animation: tagpop 0.3s ease forwards 2.15s; }
+    .t3 { animation: tagpop 0.3s ease forwards 2.3s; }
+    .t4 { animation: tagpop 0.3s ease forwards 2.45s; }
+    .t5 { animation: tagpop 0.3s ease forwards 2.6s; }
+
+    /* Scan line */
+    .scan { animation: scan 4s linear infinite 2s; }
+
+    /* Particles */
+    .pt { animation: float 3.5s ease-in-out infinite; fill-opacity: 0.5; }
+    .pt1 { animation-delay: 0s; }
+    .pt2 { animation-delay: 0.7s; }
+    .pt3 { animation-delay: 1.4s; }
+    .pt4 { animation-delay: 2.1s; }
+    .pt5 { animation-delay: 0.35s; }
+    .pt6 { animation-delay: 1.05s; }
+
+    /* Right panel */
+    .rpanel { opacity: 0; animation: fadein 0.5s ease forwards 2.8s; }
+    .rpulse { animation: rpulse 3s ease-in-out infinite 3s; }
+
+    /* Cursor blink */
+    .cursor { animation: blink 1s step-end infinite 2.2s; }
+
+    @keyframes drawc   { to { stroke-dashoffset: 0; } }
+    @keyframes drawline { to { stroke-dashoffset: 0; } }
+    @keyframes pop     { to { opacity: 1; } }
+    @keyframes fadein  { to { opacity: 1; } }
+    @keyframes tagpop  { 0% { opacity:0; transform:translateY(4px); } 100% { opacity:1; transform:translateY(0); } }
+    @keyframes barfill { to { transform: scaleX(1); } }
+    @keyframes scan    { 0% { transform: translateY(-40px); } 100% { transform: translateY(280px); } }
+    @keyframes float   { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-7px); } }
+    @keyframes rpulse  { 0%,100% { opacity:0.7; } 50% { opacity:1; } }
+    @keyframes blink   { 0%,100% { opacity:1; } 50% { opacity:0; } }
+  </style>
+
+  <g clip-path="url(#banner-clip)">
+    <!-- Background -->
+    <rect width="900" height="240" fill="url(#bgGrad)"/>
+
+    <!-- Grid horizontal -->
+    <line class="grid" x1="0" y1="30"  x2="900" y2="30"/>
+    <line class="grid" x1="0" y1="60"  x2="900" y2="60"/>
+    <line class="grid" x1="0" y1="90"  x2="900" y2="90"/>
+    <line class="grid" x1="0" y1="120" x2="900" y2="120"/>
+    <line class="grid" x1="0" y1="150" x2="900" y2="150"/>
+    <line class="grid" x1="0" y1="180" x2="900" y2="180"/>
+    <line class="grid" x1="0" y1="210" x2="900" y2="210"/>
+
+    <!-- Grid vertical -->
+    <line class="grid" x1="90"  y1="0" x2="90"  y2="240"/>
+    <line class="grid" x1="180" y1="0" x2="180" y2="240"/>
+    <line class="grid" x1="270" y1="0" x2="270" y2="240"/>
+    <line class="grid" x1="360" y1="0" x2="360" y2="240"/>
+    <line class="grid" x1="450" y1="0" x2="450" y2="240"/>
+    <line class="grid" x1="540" y1="0" x2="540" y2="240"/>
+    <line class="grid" x1="630" y1="0" x2="630" y2="240"/>
+    <line class="grid" x1="720" y1="0" x2="720" y2="240"/>
+    <line class="grid" x1="810" y1="0" x2="810" y2="240"/>
+
+    <!-- Scan line -->
+    <rect class="scan" x="0" y="0" width="900" height="35" fill="url(#scanGrad)"/>
+
+    <!-- Top accent line -->
+    <line class="accent-line" x1="22" y1="9" x2="878" y2="9" stroke="url(#barGrad)" stroke-width="1.5" fill="none"/>
+
+    <!-- Corner TL -->
+    <path class="corner c1" d="M22 32 L22 20 L34 20"/>
+    <!-- Corner TR -->
+    <path class="corner c2" d="M878 32 L878 20 L866 20"/>
+    <!-- Corner BL -->
+    <path class="corner c3" d="M22 208 L22 220 L34 220"/>
+    <!-- Corner BR -->
+    <path class="corner c4" d="M878 208 L878 220 L866 220"/>
+
+    <!-- Left particles -->
+    <circle class="pt pt1" cx="12" cy="55"  r="1.5" fill="#7C3AED"/>
+    <circle class="pt pt2" cx="8"  cy="95"  r="1"   fill="#06B6D4"/>
+    <circle class="pt pt3" cx="15" cy="140" r="1.5" fill="#7C3AED"/>
+    <circle class="pt pt4" cx="7"  cy="185" r="1"   fill="#06B6D4"/>
+    <circle class="pt pt5" cx="18" cy="75"  r="1"   fill="#06B6D4"/>
+    <circle class="pt pt6" cx="10" cy="165" r="1.5" fill="#7C3AED"/>
+
+    <!-- Right particles -->
+    <circle class="pt pt2" cx="888" cy="50"  r="1.5" fill="#7C3AED"/>
+    <circle class="pt pt3" cx="892" cy="90"  r="1"   fill="#06B6D4"/>
+    <circle class="pt pt1" cx="885" cy="145" r="1.5" fill="#7C3AED"/>
+    <circle class="pt pt4" cx="893" cy="190" r="1"   fill="#06B6D4"/>
+    <circle class="pt pt6" cx="882" cy="70"  r="1"   fill="#06B6D4"/>
+    <circle class="pt pt5" cx="889" cy="170" r="1.5" fill="#7C3AED"/>
+
+    <!-- LEFT PANEL: boot sequence terminal -->
+    <!-- Boot line 0 -->
+    <text class="boot0" font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="40" y="48">
+      <tspan fill="#22C55E">[ OK ]</tspan>
+      <tspan fill="#94A3B8" dx="6">loading soc-analyst-starter v2.0</tspan>
+    </text>
+    <!-- Boot line 1 -->
+    <text class="boot1" font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="40" y="62">
+      <tspan fill="#22C55E">[ OK ]</tspan>
+      <tspan fill="#94A3B8" dx="6">initializing threat intelligence feeds</tspan>
+    </text>
+    <!-- Boot line 2 -->
+    <text class="boot2" font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="40" y="76">
+      <tspan fill="#22C55E">[ OK ]</tspan>
+      <tspan fill="#94A3B8" dx="6">SIEM connectors: elastic · splunk · wazuh</tspan>
+    </text>
+    <!-- Boot line 3 -->
+    <text class="boot3" font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="40" y="90">
+      <tspan fill="#EAB308">[ -- ]</tspan>
+      <tspan fill="#94A3B8" dx="6">analyst tier: L1 → L2 → L3</tspan>
+    </text>
+    <!-- Boot line 4: progress bar label -->
+    <text class="boot4" font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="40" y="107">
+      <tspan fill="#06B6D4">READY</tspan>
+      <tspan fill="#94A3B8" dx="6">mounting knowledge base...</tspan>
+    </text>
+
+    <!-- Progress bar -->
+    <rect class="boot4 bar-bg" x="40" y="113" width="320" height="5" rx="2"/>
+    <rect class="boot4 bar-fill" x="40" y="113" width="320" height="5" rx="2" fill="url(#barGrad)" filter="url(#glow-bar)"/>
+
+    <!-- Main title -->
+    <text class="title" x="40" y="162">SOC Analyst Starter</text>
+
+    <!-- Subtitle -->
+    <text class="sub" x="42" y="182">field guide for Tier 1 analysts — tools, labs, workflows, career path</text>
+
+    <!-- Tags -->
+    <g class="tag t1">
+      <rect x="40" y="196" width="46" height="18" rx="3" fill="none" stroke="#7C3AED" stroke-width="1"/>
+      <circle cx="51" cy="205" r="3" fill="#7C3AED"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="58" y="209" fill="#E6EDF3">SOC</text>
+    </g>
+    <g class="tag t2">
+      <rect x="94" y="196" width="50" height="18" rx="3" fill="none" stroke="#06B6D4" stroke-width="1"/>
+      <circle cx="105" cy="205" r="3" fill="#06B6D4"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="112" y="209" fill="#E6EDF3">SIEM</text>
+    </g>
+    <g class="tag t3">
+      <rect x="152" y="196" width="46" height="18" rx="3" fill="none" stroke="#7C3AED" stroke-width="1"/>
+      <circle cx="163" cy="205" r="3" fill="#7C3AED"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="170" y="209" fill="#E6EDF3">DFIR</text>
+    </g>
+    <g class="tag t4">
+      <rect x="206" y="196" width="76" height="18" rx="3" fill="none" stroke="#22C55E" stroke-width="1"/>
+      <circle cx="217" cy="205" r="3" fill="#22C55E"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="224" y="209" fill="#E6EDF3">Threat Intel</text>
+    </g>
+    <g class="tag t5">
+      <rect x="290" y="196" width="72" height="18" rx="3" fill="none" stroke="#06B6D4" stroke-width="1"/>
+      <circle cx="301" cy="205" r="3" fill="#06B6D4"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="10px" x="308" y="209" fill="#E6EDF3">Blue Team</text>
+    </g>
+
+    <!-- Cursor after title zone -->
+    <rect class="cursor" x="42" y="220" width="8" height="12" fill="#7C3AED" opacity="0.8"/>
+
+    <!-- RIGHT PANEL: stat box -->
+    <g class="rpanel rpulse">
+      <rect x="688" y="38" width="178" height="148" rx="4" fill="#060f1e" stroke="#7C3AED" stroke-width="1"/>
+      <!-- header bar -->
+      <rect x="688" y="38" width="178" height="22" rx="4" fill="#0d1f3a"/>
+      <rect x="688" y="50" width="178" height="10" fill="#0d1f3a"/>
+      <circle cx="703" cy="49" r="4" fill="#7C3AED"/>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#E6EDF3" x="713" y="53">ANALYST DASHBOARD</text>
+
+      <!-- Divider -->
+      <line x1="700" y1="68" x2="854" y2="68" stroke="#0a1628" stroke-width="1"/>
+
+      <!-- Stat rows -->
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="83">domains covered</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#06B6D4" x="820" y="83">07</text>
+
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="99">practice platforms</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#06B6D4" x="820" y="99">08</text>
+
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="115">certifications mapped</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#22C55E" x="820" y="115">06</text>
+
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="131">career paths</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#EAB308" x="820" y="131">L1→L3+</text>
+
+      <!-- Divider -->
+      <line x1="700" y1="141" x2="854" y2="141" stroke="#0a1628" stroke-width="1"/>
+
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="155">author</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#7C3AED" x="700" y="168">@Nervi0z · VAR Group</text>
+      <text font-family="'JetBrains Mono','Courier New',monospace" font-size="9px" fill="#94A3B8" x="700" y="179">Madrid · Security Analyst</text>
+    </g>
+
+  </g>
+</svg>
